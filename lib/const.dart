@@ -7,12 +7,14 @@ class TextWidget extends StatelessWidget {
     required this.text,
     this.color,
     this.fontWeight,
+    this.textAlign,
     this.letterSpacing,
   });
 
   final double? size;
   final String text;
   final Color? color;
+  final TextAlign? textAlign;
   final FontWeight? fontWeight;
   final double? letterSpacing;
 
@@ -20,6 +22,7 @@ class TextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: textAlign,
       style: TextStyle(
           fontSize: size,
           color: color,

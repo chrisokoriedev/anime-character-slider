@@ -53,7 +53,7 @@ class _MainAppState extends State<MainApp> {
                 Positioned(
                   left: 0,
                   right: 0,
-                  top: size.height * 0.4 + 30,
+                  top: size.height * 0.4 + 10,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -62,12 +62,37 @@ class _MainAppState extends State<MainApp> {
                           radius: size.width * 0.2,
                           backgroundImage:
                               CachedNetworkImageProvider(data.foregroundImage)),
-                      SizedBox(height: size.height * 0.050),
-                      TextWidget(text: data.name, size: size.width * 0.1),
+                      SizedBox(height: size.height * 0.040),
+                      TextWidget(
+                          text: data.name,
+                          size: size.width * 0.1,
+                          letterSpacing: 1.7),
+                      TextWidget(
+                          text: data.serie,
+                          size: size.width * 0.050,
+                          letterSpacing: 1.7),
                       SizedBox(height: size.height * 0.020),
                       TextWidget(
-                          text: data.des, size: size.width * 0.040),
-                      SizedBox(height: size.height * 0.070),
+                        text: data.des,
+                        size: size.width * 0.040,
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: size.height * 0.010),
+                      Wrap(
+                        spacing: size.width * 0.020,
+                        children: [
+                          Chip(
+                              avatar: const Icon(Icons.shield_sharp),
+                              label: TextWidget(text: data.weapon, size: 12)),
+                          Chip(
+                              avatar: const Icon(Icons.female),
+                              label: TextWidget(text: data.wife, size: 12)),
+                          Chip(
+                              avatar: const Icon(Icons.moving_outlined),
+                              label: TextWidget(text: data.move, size: 12)),
+                        ],
+                      ),
+                      SizedBox(height: size.height * 0.050),
                       SizedBox(
                         width: size.width * 0.7,
                         child: Row(
@@ -82,14 +107,14 @@ class _MainAppState extends State<MainApp> {
                                         currentIndex,
                                         duration:
                                             const Duration(milliseconds: 300),
-                                        curve: Curves.easeInOut,
+                                        curve: Curves.bounceOut,
                                       );
                                     });
                                   }
                                 },
                                 child: Icon(
                                   Icons.arrow_back_ios,
-                                  size: size.width * 0.1,
+                                  size: size.width * 0.070,
                                 )),
                             SmoothPageIndicator(
                               controller: pageCtrl,
@@ -109,14 +134,14 @@ class _MainAppState extends State<MainApp> {
                                           currentIndex,
                                           duration:
                                               const Duration(milliseconds: 300),
-                                          curve: Curves.easeInOut,
+                                          curve: Curves.bounceInOut,
                                         );
                                       });
                                     }
                                   });
                                 },
                                 child: Icon(Icons.arrow_forward_ios,
-                                    size: size.width * 0.1)),
+                                    size: size.width * 0.070)),
                           ],
                         ),
                       )
