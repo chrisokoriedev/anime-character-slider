@@ -35,15 +35,18 @@ class MainApp extends StatelessWidget {
                   backgroundColor: Colors.blue,
                   radius: size.width * 0.2,
                 ),
-                const Text("Hello"),
-                const Text("Hello"),
+                SizedBox(height: size.height * 0.050),
+                TextWidget(text: 'Name', size: size.width * 0.1),
+                SizedBox(height: size.height * 0.020),
+                TextWidget(text: 'Name', size: size.width * 0.1),
+                SizedBox(height: size.height * 0.050),
                 SizedBox(
                   width: size.width * 0.5,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Icon(Icons.arrow_back_ios),
-                      Text('Name'),
+                      TextWidget(text: 'Name', size: size.width * 0.050),
                       Icon(Icons.arrow_forward_ios),
                     ],
                   ),
@@ -53,6 +56,35 @@ class MainApp extends StatelessWidget {
           ),
         ],
       )),
+    );
+  }
+}
+
+class TextWidget extends StatelessWidget {
+  const TextWidget({
+    super.key,
+    required this.size,
+    required this.text,
+    this.color,
+    this.fontWeight,
+    this.letterSpacing,
+  });
+
+  final double? size;
+  final String text;
+  final Color? color;
+  final FontWeight? fontWeight;
+  final double? letterSpacing;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+          fontSize: size,
+          color: color,
+          fontWeight: fontWeight,
+          letterSpacing: letterSpacing),
     );
   }
 }
