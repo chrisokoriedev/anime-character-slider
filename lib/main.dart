@@ -133,8 +133,8 @@ class _MainAppState extends State<MainApp> {
                                         pageCtrl.animateToPage(
                                           currentIndex,
                                           duration:
-                                              const Duration(milliseconds: 300),
-                                          curve: Curves.bounceInOut,
+                                              const Duration(milliseconds: 500),
+                                          curve: Curves.fastOutSlowIn,
                                         );
                                       });
                                     }
