@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'const.dart';
@@ -38,9 +40,18 @@ class _MainAppState extends State<MainApp> {
                     left: 0,
                     right: 0,
                     child: Container(
-                        width: double.infinity,
-                        height: size.height * 0.5,
-                        color: const Color(0xFF222222))),
+                      width: double.infinity,
+                      height: size.height * 0.5,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: CachedNetworkImageProvider(
+                                  data.backgroundImage,
+                                  cacheKey: AppCacheString.splashBgImage,
+                                  cacheManager: CacheManager(Config(
+                                      AppCacheString.splashBgImage,
+                                      stalePeriod: const Duration(days: 7)))))),
+                    )),
                 Positioned(
                   left: 0,
                   right: 0,
@@ -49,9 +60,14 @@ class _MainAppState extends State<MainApp> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       CircleAvatar(
-                        backgroundColor: Colors.blue,
-                        radius: size.width * 0.2,
-                      ),
+                          backgroundColor: Colors.blue,
+                          radius: size.width * 0.2,
+                          backgroundImage: CachedNetworkImageProvider(
+                              data.foregroundImage,
+                              cacheKey: AppCacheString.splashBgImage,
+                              cacheManager: CacheManager(Config(
+                                  AppCacheString.splashBgImage,
+                                  stalePeriod: const Duration(days: 7))))),
                       SizedBox(height: size.height * 0.050),
                       TextWidget(text: data.name, size: size.width * 0.1),
                       SizedBox(height: size.height * 0.020),
@@ -87,4 +103,8 @@ class _MainAppState extends State<MainApp> {
       )),
     );
   }
+}
+
+class AppCacheString {
+  static const splashBgImage = "splashBgImage";
 }

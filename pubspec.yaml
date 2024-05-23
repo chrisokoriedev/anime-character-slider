@@ -9,8 +9,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-    
+
   smooth_page_indicator: ^1.1.0
+  cached_network_image: ^3.3.0
+  flutter_cache_manager: 
+
+
 
 dev_dependencies:
   flutter_test:
