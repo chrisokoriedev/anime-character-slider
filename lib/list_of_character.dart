@@ -68,7 +68,7 @@ List<AnimeCharacter> getList = [
       foregroundImage:
           'https://i.pinimg.com/564x/38/94/7f/38947f3ff56859931fb1916b9885eb13.jpg',
       backgroundImage:
-          'https://i.pinimg.com/originals/b7/f0/bc/b7f0bcec712f6ff45be93feb7d1668d4.gif'),
+          'https://i.pinimg.com/originals/be/09/0b/be090bfbad5feec0df66b6d4d77cc806.gif'),
   AnimeCharacter(
       name: 'Natsu Dragneel',
       des:

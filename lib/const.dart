@@ -31,3 +31,6 @@ class TextWidget extends StatelessWidget {
     );
   }
 }
+class AppCacheString {
+  static const splashBgImage = "splashBgImage";
+}

@@ -43,7 +43,7 @@ class _MainAppState extends State<MainApp> {
                     right: 0,
                     child: Container(
                       width: double.infinity,
-                      height: size.height * 0.5,
+                      height: size.height * 0.6,
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               fit: BoxFit.cover,
@@ -62,7 +62,7 @@ class _MainAppState extends State<MainApp> {
                           radius: size.width * 0.2,
                           backgroundImage:
                               CachedNetworkImageProvider(data.foregroundImage)),
-                      SizedBox(height: size.height * 0.040),
+                      SizedBox(height: size.height * 0.075),
                       TextWidget(
                           text: data.name,
                           size: size.width * 0.1,
@@ -157,6 +157,4 @@ class _MainAppState extends State<MainApp> {
   }
 }
 
-class AppCacheString {
-  static const splashBgImage = "splashBgImage";
-}
+
