@@ -46,11 +46,7 @@ class _MainAppState extends State<MainApp> {
                           image: DecorationImage(
                               fit: BoxFit.cover,
                               image: CachedNetworkImageProvider(
-                                  data.backgroundImage,
-                                  cacheKey: AppCacheString.splashBgImage,
-                                  cacheManager: CacheManager(Config(
-                                      AppCacheString.splashBgImage,
-                                      stalePeriod: const Duration(days: 7)))))),
+                                  data.backgroundImage))),
                     )),
                 Positioned(
                   left: 0,
@@ -62,12 +58,8 @@ class _MainAppState extends State<MainApp> {
                       CircleAvatar(
                           backgroundColor: Colors.blue,
                           radius: size.width * 0.2,
-                          backgroundImage: CachedNetworkImageProvider(
-                              data.foregroundImage,
-                              cacheKey: AppCacheString.splashBgImage,
-                              cacheManager: CacheManager(Config(
-                                  AppCacheString.splashBgImage,
-                                  stalePeriod: const Duration(days: 7))))),
+                          backgroundImage:
+                              CachedNetworkImageProvider(data.foregroundImage)),
                       SizedBox(height: size.height * 0.050),
                       TextWidget(text: data.name, size: size.width * 0.1),
                       SizedBox(height: size.height * 0.020),
