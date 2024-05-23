@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 void main() {
   runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
 
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  final PageController pageCtrl = PageController();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -45,9 +52,16 @@ class MainApp extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.arrow_back_ios),
-                      TextWidget(text: 'Name', size: size.width * 0.050),
-                      Icon(Icons.arrow_forward_ios),
+                      const Icon(Icons.arrow_back_ios),
+                      SmoothPageIndicator(
+                        count: 6,
+                        effect: JumpingDotEffect(
+                            radius:  size.width * 0.020,
+                            dotHeight: size.height * 0.02,
+                            dotWidth: size.width * 0.02),
+                        controller: pageCtrl,
+                      ),
+                      const Icon(Icons.arrow_forward_ios),
                     ],
                   ),
                 )
