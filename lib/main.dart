@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'const.dart';
@@ -18,7 +17,8 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  final PageController pageCtrl = PageController();
+  int currentIndex = 0;
+  final PageController pageCtrl = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -27,6 +27,8 @@ class _MainAppState extends State<MainApp> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
           body: PageView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: pageCtrl,
         itemCount: getList.length,
         itemBuilder: (_, index) {
           final data = getList[index];
@@ -63,25 +65,58 @@ class _MainAppState extends State<MainApp> {
                       SizedBox(height: size.height * 0.050),
                       TextWidget(text: data.name, size: size.width * 0.1),
                       SizedBox(height: size.height * 0.020),
-                      Center(
-                          child: TextWidget(
-                              text: data.des, size: size.width * 0.040)),
-                      SizedBox(height: size.height * 0.050),
+                      TextWidget(
+                          text: data.des, size: size.width * 0.040),
+                      SizedBox(height: size.height * 0.070),
                       SizedBox(
-                        width: size.width * 0.5,
+                        width: size.width * 0.7,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Icon(Icons.arrow_back_ios),
+                            GestureDetector(
+                                onTap: () {
+                                  if (currentIndex > 0) {
+                                    setState(() {
+                                      currentIndex--;
+                                      pageCtrl.animateToPage(
+                                        currentIndex,
+                                        duration:
+                                            const Duration(milliseconds: 300),
+                                        curve: Curves.easeInOut,
+                                      );
+                                    });
+                                  }
+                                },
+                                child: Icon(
+                                  Icons.arrow_back_ios,
+                                  size: size.width * 0.1,
+                                )),
                             SmoothPageIndicator(
                               controller: pageCtrl,
-                              count: 6,
+                              count: getList.length,
                               effect: JumpingDotEffect(
                                   radius: size.width * 0.020,
                                   dotHeight: size.height * 0.02,
                                   dotWidth: size.width * 0.02),
                             ),
-                            const Icon(Icons.arrow_forward_ios),
+                            GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    if (currentIndex < getList.length - 1) {
+                                      setState(() {
+                                        currentIndex++;
+                                        pageCtrl.animateToPage(
+                                          currentIndex,
+                                          duration:
+                                              const Duration(milliseconds: 300),
+                                          curve: Curves.easeInOut,
+                                        );
+                                      });
+                                    }
+                                  });
+                                },
+                                child: Icon(Icons.arrow_forward_ios,
+                                    size: size.width * 0.1)),
                           ],
                         ),
                       )

@@ -30,9 +30,9 @@ List<AnimeCharacter> getList = [
       move: 'Rasengan/Bijuu Mode',
       wife: 'Hinata Hyuga',
       foregroundImage:
-          'https://i.pinimg.com/564x/9f/99/6e/9f996eeca7264769ebf6b30572717102.jpg',
+          'https://i.pinimg.com/564x/22/3f/a8/223fa84e2e58598d27a6d733b5ff99e7.jpg',
       backgroundImage:
-          'https://i.pinimg.com/originals/3c/5e/de/3c5ede367e8435e37ede6541de94da87.gif'),
+          'https://i.pinimg.com/originals/9a/1f/11/9a1f11839c9f9e902f09e8259805319a.gif'),
   AnimeCharacter(
       name: 'Ichigo Kurosaki',
       des:
