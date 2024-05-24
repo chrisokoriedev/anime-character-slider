@@ -9,9 +9,11 @@ class TextWidget extends StatelessWidget {
     this.fontWeight,
     this.textAlign,
     this.letterSpacing,
+    this.maxLine,
   });
 
   final double? size;
+  final int? maxLine;
   final String text;
   final Color? color;
   final TextAlign? textAlign;
@@ -23,6 +25,7 @@ class TextWidget extends StatelessWidget {
     return Text(
       text,
       textAlign: textAlign,
+      maxLines: maxLine,
       style: TextStyle(
           fontSize: size,
           color: color,
@@ -31,6 +34,7 @@ class TextWidget extends StatelessWidget {
     );
   }
 }
+
 class AppCacheString {
   static const splashBgImage = "splashBgImage";
 }

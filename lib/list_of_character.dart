@@ -51,7 +51,7 @@ List<AnimeCharacter> getList = [
           "A Saiyan warrior with an insatiable appetite for combat and food, Goku defends Earth from powerful foes.",
       serie: 'Dragon Ball Z',
       weapon: 'Power Pole (Nyoi-Bo)',
-      move: 'Kamehameha/Ultra Instinct',
+      move: 'Ultra Instinct',
       wife: 'Chi-Chi',
       foregroundImage:
           'https://i.pinimg.com/236x/14/3a/9f/143a9f7d78bb7b7fc168301e646eea88.jpg',

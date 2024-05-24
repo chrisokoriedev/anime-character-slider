@@ -68,15 +68,15 @@ class _MainAppState extends State<MainApp> {
                                 radius: size.width * 0.2,
                                 backgroundImage: CachedNetworkImageProvider(
                                     data.foregroundImage)),
-                            SizedBox(height: size.height * 0.075),
+                            SizedBox(height: size.height * 0.050),
                             TextWidget(
                                 text: data.name,
                                 size: size.width * 0.1,
-                                letterSpacing: 1.7),
+                                letterSpacing: 2.0),
                             TextWidget(
                                 text: data.serie,
                                 size: size.width * 0.050,
-                                letterSpacing: 1.7),
+                                letterSpacing: 1.8),
                             SizedBox(height: size.height * 0.020),
                             SizedBox(
                               width: size.width * 0.8,
@@ -84,9 +84,11 @@ class _MainAppState extends State<MainApp> {
                                 text: data.des,
                                 size: size.width * 0.040,
                                 textAlign: TextAlign.center,
+                                letterSpacing: 1.6,
+                                maxLine: 3,
                               ),
                             ),
-                            SizedBox(height: size.height * 0.030),
+                            SizedBox(height: size.height * 0.020),
                             Wrap(
                               spacing: size.width * 0.020,
                               children: [
