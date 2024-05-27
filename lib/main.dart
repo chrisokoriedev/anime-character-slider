@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -18,6 +19,8 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   int currentIndex = 0;
+  int start = 200;
+  int delay = 200;
   final PageController pageCtrl = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
@@ -63,48 +66,63 @@ class _MainAppState extends State<MainApp> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            CircleAvatar(
-                                backgroundColor: Colors.blue,
-                                radius: size.width * 0.2,
-                                backgroundImage: CachedNetworkImageProvider(
-                                    data.foregroundImage)),
+                            FadeIn(
+                              delay: Duration(milliseconds: delay + start),
+                              child: CircleAvatar(
+                                  backgroundColor: Colors.blue,
+                                  radius: size.width * 0.2,
+                                  backgroundImage: CachedNetworkImageProvider(
+                                      data.foregroundImage)),
+                            ),
                             SizedBox(height: size.height * 0.050),
-                            TextWidget(
-                                text: data.name,
-                                size: size.width * 0.1,
-                                letterSpacing: 2.0),
-                            TextWidget(
-                                text: data.serie,
-                                size: size.width * 0.050,
-                                letterSpacing: 1.8),
-                            SizedBox(height: size.height * 0.020),
-                            SizedBox(
-                              width: size.width * 0.8,
+                            FadeInUp(
+                              delay: Duration(milliseconds: delay + 1 * start),
                               child: TextWidget(
-                                text: data.des,
-                                size: size.width * 0.040,
-                                textAlign: TextAlign.center,
-                                letterSpacing: 1.6,
-                                maxLine: 3,
+                                  text: data.name,
+                                  size: size.width * 0.1,
+                                  letterSpacing: 2.0),
+                            ),
+                            SlideInLeft(
+                              delay: Duration(milliseconds: delay + 1 * start),
+                              child: TextWidget(
+                                  text: data.serie,
+                                  size: size.width * 0.050,
+                                  letterSpacing: 1.8),
+                            ),
+                            SizedBox(height: size.height * 0.020),
+                            SlideInRight(
+                              delay: Duration(milliseconds: delay + 1 * start),
+                              child: SizedBox(
+                                width: size.width * 0.8,
+                                child: TextWidget(
+                                  text: data.des,
+                                  size: size.width * 0.040,
+                                  textAlign: TextAlign.center,
+                                  letterSpacing: 1.6,
+                                  maxLine: 3,
+                                ),
                               ),
                             ),
                             SizedBox(height: size.height * 0.020),
-                            Wrap(
-                              spacing: size.width * 0.020,
-                              children: [
-                                Chip(
-                                    avatar: const Icon(Icons.shield_sharp),
-                                    label: TextWidget(
-                                        text: data.weapon, size: 12)),
-                                Chip(
-                                    avatar: const Icon(Icons.female),
-                                    label:
-                                        TextWidget(text: data.wife, size: 12)),
-                                Chip(
-                                    avatar: const Icon(Icons.moving_outlined),
-                                    label:
-                                        TextWidget(text: data.move, size: 12)),
-                              ],
+                            FadeInUp(
+                              delay: Duration(milliseconds: delay + 2 * start),
+                              child: Wrap(
+                                spacing: size.width * 0.020,
+                                children: [
+                                  Chip(
+                                      avatar: const Icon(Icons.shield_sharp),
+                                      label: TextWidget(
+                                          text: data.weapon, size: 12)),
+                                  Chip(
+                                      avatar: const Icon(Icons.female),
+                                      label: TextWidget(
+                                          text: data.wife, size: 12)),
+                                  Chip(
+                                      avatar: const Icon(Icons.moving_outlined),
+                                      label: TextWidget(
+                                          text: data.move, size: 12)),
+                                ],
+                              ),
                             ),
                           ],
                         ),
