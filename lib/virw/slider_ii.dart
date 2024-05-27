@@ -1,4 +1,5 @@
 import 'package:animatedimageslider/const.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -8,9 +9,18 @@ class SliderTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+      body: Container(
         padding: EdgeInsets.symmetric(horizontal: 0.2.dp, vertical: 0.1.dp),
+        width: double.infinity,
+        height: 0.9.dp,
+        decoration: const BoxDecoration(
+          
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: CachedNetworkImageProvider(
+                    'https://i.pinimg.com/originals/73/03/85/7303858d8f1ee448bf2d1c35e672461f.gif'))),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               width: 0.5.dp,
@@ -26,7 +36,7 @@ class SliderTwo extends StatelessWidget {
                         const SizedBox(height: 10),
                         TextWidget(size: 11.sp, text: 'Anime')
                       ]),
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 10.h),
                   TextWidget(text: 'Naruto', size: 20.sp),
                   TextWidget(
                       text:
@@ -34,7 +44,7 @@ class SliderTwo extends StatelessWidget {
                           '  r of the Nine-Tails fox demon sealed within him.',
                       size: 15.sp,
                       letterSpacing: 1.4),
-                  SizedBox(height: 5.h),
+                  SizedBox(height: 3.h),
                   Row(
                     children: [
                       ElevatedButton(
@@ -49,8 +59,7 @@ class SliderTwo extends StatelessWidget {
                             size: 10.sp,
                             color: Colors.white,
                           )),
-                  SizedBox(width: 5.w),
-
+                      SizedBox(width: 5.w),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue,
@@ -64,9 +73,47 @@ class SliderTwo extends StatelessWidget {
                             color: Colors.white,
                           )),
                     ],
-                  )
+                  ),
                 ],
               ),
+            ),
+            SizedBox(height: 4.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  flex: 6,
+                  child: Column(
+                    children: [
+                      Chip(
+                          avatar: const Icon(Icons.shield_sharp),
+                          label: TextWidget(
+                              text: 'sssssssssssssssssss', size: 12.sp)),
+                      SizedBox(height: 3.h),
+                      Chip(
+                          avatar: const Icon(Icons.female),
+                          label: TextWidget(
+                              text: 'sssssssssssssssssss', size: 12.sp)),
+                      SizedBox(height: 3.h),
+                      Chip(
+                          avatar: const Icon(Icons.moving_outlined),
+                          label: TextWidget(
+                              text: 'sssssssssssssssssss', size: 12.sp)),
+                    ],
+                  ),
+                ),
+                Flexible(
+                    flex: 6,
+                    child: Column(
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          height: 30.h,
+                          color: Colors.black26,
+                        )
+                      ],
+                    )),
+              ],
             ),
           ],
         ),
