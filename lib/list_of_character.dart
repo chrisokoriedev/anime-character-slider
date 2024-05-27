@@ -81,7 +81,6 @@ List<AnimeCharacter> getList = [
           'https://i.pinimg.com/564x/cc/ac/62/ccac62e52348328b9547526b3b7b4721.jpg',
       backgroundImage:
           'https://i.pinimg.com/originals/84/cd/44/84cd442222b4461fc067db586cf47524.gif'),
-
   AnimeCharacter(
       name: 'Sasuke Uchiha',
       des:
@@ -106,7 +105,6 @@ List<AnimeCharacter> getList = [
           'https://i.pinimg.com/564x/9b/00/e4/9b00e46c8897cc1e046152f4a006cac2.jpg',
       backgroundImage:
           'https://i.pinimg.com/originals/ff/ef/6a/ffef6afff9a2b3fe43125db58dafb14f.gif'),
-
   AnimeCharacter(
       name: 'Tanjiro Kamado',
       des:
@@ -119,9 +117,4 @@ List<AnimeCharacter> getList = [
           'https://i.pinimg.com/564x/9f/99/6e/9f996eeca7264769ebf6b30572717102.jpg',
       backgroundImage:
           'https://i.pinimg.com/originals/3c/5e/de/3c5ede367e8435e37ede6541de94da87.gif'),
-
-  // AnimeCharacter(
-  //     name: 'Tanjiro Kamado',
-  //     des:
-  //         "Tanjiro Kamado is a fictional character and the protagonist of Koyoharu Gotouge's manga Demon Slayer: Kimetsu no Yaiba",
 ];
