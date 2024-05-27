@@ -13,6 +13,7 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   cached_network_image: ^3.3.0
   animate_do:
+  responsive_sizer: ^3.3.1
 
 
 
