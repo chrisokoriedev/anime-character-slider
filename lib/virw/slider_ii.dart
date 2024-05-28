@@ -2,7 +2,6 @@ import 'package:animatedimageslider/const.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
-import 'package:infinite_carousel/infinite_carousel.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -19,7 +18,7 @@ class _SliderTwoState extends State<SliderTwo> {
   int currentIndex = 0;
 
   final PageController pageCtrl = PageController(initialPage: 0);
-  final InfiniteScrollController pageCtrlII = InfiniteScrollController();
+  final CarouselController caroCtlr = CarouselController();
   void _onPageChanged(int index) {
     setState(() {
       currentIndex = index;
@@ -72,7 +71,7 @@ class _SliderTwoState extends State<SliderTwo> {
                                       const SizedBox(height: 10),
                                       TextWidget(size: 11.sp, text: 'Anime')
                                     ]),
-                                SizedBox(height: 10.h),
+                                SizedBox(height: 5.h),
                                 TextWidget(text: data.name, size: 20.sp),
                                 TextWidget(
                                     text: data.des,
@@ -152,9 +151,12 @@ class _SliderTwoState extends State<SliderTwo> {
                     iconData: Icons.arrow_back_ios,
                     press: () {
                       setState(() {
+                        caroCtlr.previousPage(
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.fastOutSlowIn);
                         pageCtrl.previousPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.fastLinearToSlowEaseIn);
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.fastOutSlowIn);
                       });
                     },
                   ),
@@ -163,6 +165,9 @@ class _SliderTwoState extends State<SliderTwo> {
                       iconData: Icons.arrow_forward_ios,
                       press: () {
                         setState(() {
+                          caroCtlr.nextPage(
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.fastOutSlowIn);
                           pageCtrl.nextPage(
                               duration: const Duration(milliseconds: 500),
                               curve: Curves.fastOutSlowIn);
@@ -172,39 +177,49 @@ class _SliderTwoState extends State<SliderTwo> {
                   SmoothPageIndicator(
                     controller: pageCtrl,
                     count: getList.length,
-                    effect: JumpingDotEffect(
+                    effect: ExpandingDotsEffect(
                         radius: 10.sp, dotHeight: 1.w, dotWidth: 3.h),
                   ),
                 ],
               )),
           Positioned(
             bottom: 80,
-            right: 30,
+            right: 0,
             child: SizedBox(
                 width: 90.h,
-                height: 50.h,
                 child: ExpandableCarousel(
                   options: CarouselOptions(
-                    viewportFraction: 0.5,
+                      height: 60.h,
+                      enlargeCenterPage: true,
+                      initialPage: currentIndex,
+                      controller: caroCtlr,
+                      viewportFraction: 0.5,
                       autoPlay: false,
                       autoPlayInterval: const Duration(seconds: 2),
                       floatingIndicator: false,
                       showIndicator: false),
-                  items: getList.map((i) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          width: 20.h,
-                          height: 50.h,
-                          margin: EdgeInsets.symmetric(horizontal: 1.w),
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: CachedNetworkImageProvider(
-                                      i.foregroundImage)))
-                        );
-                      },
-                    );
+                  items: getList.asMap().entries.map((entry) {
+                    final itemIndex = entry.key;
+                    final item = entry.value;
+                    final isCurrent = itemIndex == currentIndex;
+                    return AnimatedContainer(
+                        duration: const Duration(milliseconds: 800),
+                        curve: Curves.fastOutSlowIn,
+                        width: isCurrent ? 20.w : 10.w,
+                        height: isCurrent ? 50.h : 45.h,
+                        margin: EdgeInsets.symmetric(horizontal: 1.w),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                color: isCurrent
+                                    ? Colors.white
+                                    : Colors.transparent,
+                                width: 9.sp),
+                            borderRadius:
+                                BorderRadius.circular(isCurrent ? 10.sp : 0.sp),
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: CachedNetworkImageProvider(
+                                    item.foregroundImage))));
                   }).toList(),
                 )),
           ),
