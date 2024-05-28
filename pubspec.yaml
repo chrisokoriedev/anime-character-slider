@@ -14,7 +14,9 @@ dependencies:
   cached_network_image: ^3.3.0
   animate_do:
   responsive_sizer: ^3.3.1
-  overlapped_carousel: ^1.0.2
+  infinite_carousel: ^1.0.3
+  flutter_carousel_widget: ^2.2.0
+  
 
 
 

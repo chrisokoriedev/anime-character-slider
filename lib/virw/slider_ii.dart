@@ -1,6 +1,8 @@
 import 'package:animatedimageslider/const.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
+import 'package:infinite_carousel/infinite_carousel.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -17,7 +19,12 @@ class _SliderTwoState extends State<SliderTwo> {
   int currentIndex = 0;
 
   final PageController pageCtrl = PageController(initialPage: 0);
-  final PageController pageCtrlII = PageController(initialPage: 0);
+  final InfiniteScrollController pageCtrlII = InfiniteScrollController();
+  void _onPageChanged(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +36,11 @@ class _SliderTwoState extends State<SliderTwo> {
                 physics: const NeverScrollableScrollPhysics(),
                 controller: pageCtrl,
                 itemCount: getList.length,
+                onPageChanged: _onPageChanged,
                 itemBuilder: (_, index) {
                   final data = getList[index];
 
                   return Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 0.2.dp, vertical: 0.2.dp),
                     width: double.infinity,
                     height: 100.h,
                     decoration: BoxDecoration(
@@ -42,113 +48,95 @@ class _SliderTwoState extends State<SliderTwo> {
                             fit: BoxFit.cover,
                             image: CachedNetworkImageProvider(
                                 data.backgroundImage))),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 50.w,
-                          child: Column(
+                    child: Container(
+                      width: double.infinity,
+                      height: 100.h,
+                      color: Colors.black54,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 0.2.dp, vertical: 0.2.dp),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 50.w,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      FlutterLogo(
+                                        size: 20.sp,
+                                      ),
+                                      const SizedBox(height: 10),
+                                      TextWidget(size: 11.sp, text: 'Anime')
+                                    ]),
+                                SizedBox(height: 10.h),
+                                TextWidget(text: data.name, size: 20.sp),
+                                TextWidget(
+                                    text: data.des,
+                                    size: 15.sp,
+                                    letterSpacing: 1.4),
+                                SizedBox(height: 3.h),
+                                Row(
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.red,
+                                            minimumSize: Size(10.w, 6.h),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        8.sp))),
+                                        onPressed: () {},
+                                        child: TextWidget(
+                                          text: 'Watch Now',
+                                          size: 14.sp,
+                                          color: Colors.white,
+                                        )),
+                                    SizedBox(width: 5.w),
+                                    Container(
+                                        width: 11.w,
+                                        height: 4.h,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color: Colors.white,
+                                                    width: 4.sp))),
+                                        child: TextWidget(
+                                          text: 'Read more',
+                                          size: 14.sp,
+                                          color: Colors.white,
+                                        )),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 4.h),
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    FlutterLogo(
-                                      size: 20.sp,
-                                    ),
-                                    const SizedBox(height: 10),
-                                    TextWidget(size: 11.sp, text: 'Anime')
-                                  ]),
-                              SizedBox(height: 10.h),
-                              TextWidget(text: data.name, size: 20.sp),
-                              TextWidget(
-                                  text: data.des,
-                                  size: 15.sp,
-                                  letterSpacing: 1.4),
+                              Chip(
+                                  avatar: const Icon(Icons.shield_sharp),
+                                  label: TextWidget(
+                                      text: data.weapon, size: 14.sp)),
                               SizedBox(height: 3.h),
-                              Row(
-                                children: [
-                                  ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.red,
-                                          minimumSize: Size(10.w, 6.h),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.sp))),
-                                      onPressed: () {},
-                                      child: TextWidget(
-                                        text: 'Watch Now',
-                                        size: 14.sp,
-                                        color: Colors.white,
-                                      )),
-                                  SizedBox(width: 5.w),
-                                  Container(
-                                      width: 11.w,
-                                      height: 4.h,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                          border: Border(
-                                              bottom: BorderSide(
-                                                  color: Colors.white,
-                                                  width: 4.sp))),
-                                      child: TextWidget(
-                                        text: 'Read more',
-                                        size: 14.sp,
-                                        color: Colors.white,
-                                      )),
-                                ],
-                              ),
+                              Chip(
+                                  avatar: const Icon(Icons.female),
+                                  label:
+                                      TextWidget(text: data.wife, size: 14.sp)),
+                              SizedBox(height: 3.h),
+                              Chip(
+                                  avatar: const Icon(Icons.moving_outlined),
+                                  label:
+                                      TextWidget(text: data.move, size: 14.sp)),
                             ],
                           ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              flex: 6,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Chip(
-                                      avatar: const Icon(Icons.shield_sharp),
-                                      label: TextWidget(
-                                          text: data.weapon, size: 14.sp)),
-                                  SizedBox(height: 3.h),
-                                  Chip(
-                                      avatar: const Icon(Icons.female),
-                                      label: TextWidget(
-                                          text: data.wife, size: 14.sp)),
-                                  SizedBox(height: 3.h),
-                                  Chip(
-                                      avatar: const Icon(Icons.moving_outlined),
-                                      label: TextWidget(
-                                          text: data.move, size: 14.sp)),
-                                ],
-                              ),
-                            ),
-                            Flexible(
-                                flex: 6,
-                                child: SizedBox(
-                                  height: 6.h,
-                                  child: PageView.builder(
-                                      controller: pageCtrlII,
-                                      onPageChanged: (index) {
-                                        //  index=currentIndex;
-                                      },
-                                      itemCount: getList.length,
-                                      itemBuilder: (_, index) {
-                                        return Container(
-                                          color: Colors.red,
-                                          child: Center(
-                                            child: Text(index.toString()),
-                                          ),
-                                        );
-                                      }),
-                                )),
-                          ],
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 }),
@@ -163,42 +151,22 @@ class _SliderTwoState extends State<SliderTwo> {
                   ArrowButton(
                     iconData: Icons.arrow_back_ios,
                     press: () {
-                      if (currentIndex > 0) {
-                        setState(() {
-                          currentIndex--;
-                          pageCtrl.animateToPage(
-                            currentIndex,
+                      setState(() {
+                        pageCtrl.previousPage(
                             duration: const Duration(milliseconds: 300),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                          );
-                          pageCtrlII.animateToPage(
-                            currentIndex,
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                          );
-                        });
-                      }
+                            curve: Curves.fastLinearToSlowEaseIn);
+                      });
                     },
                   ),
                   SizedBox(width: 1.w),
                   ArrowButton(
                       iconData: Icons.arrow_forward_ios,
                       press: () {
-                        if (currentIndex < getList.length - 1) {
-                          setState(() {
-                            currentIndex++;
-                            pageCtrl.animateToPage(
-                              currentIndex,
+                        setState(() {
+                          pageCtrl.nextPage(
                               duration: const Duration(milliseconds: 500),
-                              curve: Curves.fastOutSlowIn,
-                            );
-                            pageCtrlII.animateToPage(
-                              currentIndex,
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.fastOutSlowIn,
-                            );
-                          });
-                        }
+                              curve: Curves.fastOutSlowIn);
+                        });
                       }),
                   SizedBox(width: 2.w),
                   SmoothPageIndicator(
@@ -209,6 +177,37 @@ class _SliderTwoState extends State<SliderTwo> {
                   ),
                 ],
               )),
+          Positioned(
+            bottom: 80,
+            right: 30,
+            child: SizedBox(
+                width: 90.h,
+                height: 50.h,
+                child: ExpandableCarousel(
+                  options: CarouselOptions(
+                    viewportFraction: 0.5,
+                      autoPlay: false,
+                      autoPlayInterval: const Duration(seconds: 2),
+                      floatingIndicator: false,
+                      showIndicator: false),
+                  items: getList.map((i) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          width: 20.h,
+                          height: 50.h,
+                          margin: EdgeInsets.symmetric(horizontal: 1.w),
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: CachedNetworkImageProvider(
+                                      i.foregroundImage)))
+                        );
+                      },
+                    );
+                  }).toList(),
+                )),
+          ),
         ],
       ),
     );
