@@ -7,6 +7,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../list_of_character.dart';
 
+final ValueNotifier currentIndex = ValueNotifier(0);
+
 class SliderTwo extends StatefulWidget {
   const SliderTwo({super.key});
 
@@ -15,14 +17,10 @@ class SliderTwo extends StatefulWidget {
 }
 
 class _SliderTwoState extends State<SliderTwo> {
-  int currentIndex = 0;
-
   final PageController pageCtrl = PageController(initialPage: 0);
   final CarouselController caroCtlr = CarouselController();
   void _onPageChanged(int index) {
-    setState(() {
-      currentIndex = index;
-    });
+    currentIndex.value = index;
   }
 
   @override
@@ -191,7 +189,7 @@ class _SliderTwoState extends State<SliderTwo> {
                   options: CarouselOptions(
                       height: 60.h,
                       enlargeCenterPage: true,
-                      initialPage: currentIndex,
+                      initialPage: currentIndex.value,
                       controller: caroCtlr,
                       viewportFraction: 0.5,
                       autoPlay: false,
