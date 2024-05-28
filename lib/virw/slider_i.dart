@@ -165,16 +165,16 @@ class _SliderOneState extends State<SliderOne> {
                     GestureDetector(
                         onTap: () {
                           setState(() {
-                            if (currentIndex < getList.length - 1) {
-                              setState(() {
-                                currentIndex++;
-                                pageCtrl.animateToPage(
-                                  currentIndex,
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.fastOutSlowIn,
-                                );
-                              });
-                            }
+                              if (currentIndex < getList.length - 1) {
+                                setState(() {
+                                  currentIndex++;
+                                  pageCtrl.animateToPage(
+                                    currentIndex,
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.fastOutSlowIn,
+                                  );
+                                });
+                              }
                           });
                         },
                         child: Icon(Icons.arrow_forward_ios,

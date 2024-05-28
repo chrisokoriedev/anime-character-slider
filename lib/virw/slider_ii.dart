@@ -14,11 +14,13 @@ class SliderTwo extends StatefulWidget {
 }
 
 class _SliderTwoState extends State<SliderTwo> {
+  int currentIndex = 0;
+
+  final PageController pageCtrl = PageController(initialPage: 0);
+  final PageController pageCtrlII = PageController(initialPage: 0);
+
   @override
   Widget build(BuildContext context) {
-    final PageController pageCtrl = PageController(initialPage: 0);
-
-    int currentIndex = 0;
     return Scaffold(
       body: Stack(
         children: [
@@ -58,11 +60,9 @@ class _SliderTwoState extends State<SliderTwo> {
                                     TextWidget(size: 11.sp, text: 'Anime')
                                   ]),
                               SizedBox(height: 10.h),
-                              TextWidget(text: 'Naruto', size: 20.sp),
+                              TextWidget(text: data.name, size: 20.sp),
                               TextWidget(
-                                  text:
-                                      'A spirited ninja with a dream of becoming the Hokage, Naruto harnesses the powe'
-                                      '  r of the Nine-Tails fox demon sealed within him.',
+                                  text: data.des,
                                   size: 15.sp,
                                   letterSpacing: 1.4),
                               SizedBox(height: 3.h),
@@ -129,14 +129,22 @@ class _SliderTwoState extends State<SliderTwo> {
                             ),
                             Flexible(
                                 flex: 6,
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: double.infinity,
-                                      height: 30.h,
-                                      color: Colors.black26,
-                                    )
-                                  ],
+                                child: SizedBox(
+                                  height: 6.h,
+                                  child: PageView.builder(
+                                      controller: pageCtrlII,
+                                      onPageChanged: (index) {
+                                        //  index=currentIndex;
+                                      },
+                                      itemCount: getList.length,
+                                      itemBuilder: (_, index) {
+                                        return Container(
+                                          color: Colors.red,
+                                          child: Center(
+                                            child: Text(index.toString()),
+                                          ),
+                                        );
+                                      }),
                                 )),
                           ],
                         ),
@@ -163,6 +171,11 @@ class _SliderTwoState extends State<SliderTwo> {
                             duration: const Duration(milliseconds: 300),
                             curve: Curves.fastLinearToSlowEaseIn,
                           );
+                          pageCtrlII.animateToPage(
+                            currentIndex,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.fastLinearToSlowEaseIn,
+                          );
                         });
                       }
                     },
@@ -175,6 +188,11 @@ class _SliderTwoState extends State<SliderTwo> {
                           setState(() {
                             currentIndex++;
                             pageCtrl.animateToPage(
+                              currentIndex,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.fastOutSlowIn,
+                            );
+                            pageCtrlII.animateToPage(
                               currentIndex,
                               duration: const Duration(milliseconds: 500),
                               curve: Curves.fastOutSlowIn,
